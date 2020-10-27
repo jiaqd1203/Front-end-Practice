@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            /*IE8 and below*/
+            filter: alpha(opacity=30);
+            /* Firefox and Chrome */
+            opacity:0.3;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oDiv = document.getElementById('box');
+            oDiv.onmouseover = function(){
+                startMove(100);
+            }
+            oDiv.onmouseout = function(){
+                startMove(30);
+            }
+        }
+
+        var timer = null;
+        var alpha = 30;
+        function startMove(target){
+            var oDiv = document.getElementById('box');
+            clearInterval(timer);
+            timer = setInterval(function(){
+                var speed = 0;
+                if(alpha>target){
+                    speed = -10;
+                }else{
+                    speed = 10;
+                }
+                if(alpha==target){
+                    clearInterval(timer);
+                }else{
+                    alpha+=speed;
+                    oDiv.style.filter = 'alpha(opacity:'+alpha+')';
+                    oDiv.style.opacity = alpha/100;
+                }
+            },30)
+        }
+    </script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>
