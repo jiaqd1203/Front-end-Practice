@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: relative;
+            left: -200px;
+            top: 0;
+        }
+        #box span{
+            width: 50px;
+            height: 30px;
+            background-color: blue;
+            position: absolute;
+            left: 190px;
+            top: 85px;
+            color: #fff;            
+            display: block;
+            transform: rotate(270deg);
+            text-align: center;
+            font-size: 14px; 
+            line-height: 30px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        
+        window.onload = function(){            
+            var oDiv = document.getElementById('box');            
+            oDiv.onmouseover = function(){
+                startMove(0);                
+            }
+            oDiv.onmouseout = function(){
+                startMove(-200);                
+            }
+        }
+        var timer = null;
+        function startMove(target){           
+            clearInterval(timer);
+            var oDiv = document.getElementById('box');
+            timer = setInterval(function(){
+            var speed = 0;
+            if(oDiv.offsetLeft>target){
+                speed = -10;
+            }else{
+                speed = 10;
+            }
+            if(oDiv.offsetLeft==target){
+                clearInterval(timer);
+            }else{
+                oDiv.style.left =oDiv.offsetLeft+speed+'px';
+            }
+            },30);
+        }
+        
+    </script>
+</head>
+<body>
+    <div id="box">        
+        <span id="share">Share</span>        
+    </div>
+</body>
+</html>
