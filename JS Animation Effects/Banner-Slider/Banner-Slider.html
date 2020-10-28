@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            
+        }
+        li{
+            list-style: none;
+        }
+        #outer{
+            padding: 10px 0;
+            background-color: greenyellow;
+            margin: 50px auto;
+            width: 520px;
+            height: 333px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #imgList{            
+            width: 2600px;
+            height: 333px;
+            position: absolute;
+            left: 0;            
+        }
+
+        #imgList li{
+            float: left;
+            margin: 0 10px;            
+        }
+
+        #navDiv{
+            position: absolute;
+            bottom: 15px;
+            left: 205px;
+        }
+
+        #navDiv a{
+            float: left;
+            width: 12px;
+            height: 12px;           
+            background-color: red;
+            margin: 0 5px;
+            opacity: 0.5;
+            /* IE8 */
+            filter: alpha(opacity=50);            
+        }
+
+        #navDiv a:hover{
+            background-color: black;
+        } 
+
+    </style>
+    <script type="text/javascript">
+            window.onload=function(){
+               var imgList = document.getElementById("imgList");
+               var imgArr = document.getElementsByTagName("img");
+               imgList.style.width = 520*imgArr.length+"px";
+               var navDiv = document.getElementById("navDiv");
+               var outer = document.getElementById("outer");
+               navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+               var index = 0;
+               var allA = document.getElementsByTagName("a");
+               allA[index].style.backgroundColor = "black"; 
+               imgList.style.left = -520*imgArr[i]+"px";  
+            }
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <ul id="imgList">
+            <li><img src="image/1.jpg" alt=""></li>
+            <li><img src="image/2.jpg" alt=""></li>
+            <li><img src="image/3.jpg" alt=""></li>
+            <li><img src="image/4.jpg" alt=""></li>
+            <li><img src="image/5.jpg" alt=""></li>
+        </ul>
+            
+        <div id="navDiv">
+            <a href=""></a>
+            <a href=""></a>       
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+        </div>
+    </div>  
+</body>
+</html>
