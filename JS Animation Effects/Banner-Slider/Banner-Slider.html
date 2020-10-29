@@ -56,6 +56,7 @@
         } 
 
     </style>
+    <script type="text/javascript" src="/JS Animation Effects/tools.js"></script>
     <script type="text/javascript">
             window.onload=function(){
                var imgList = document.getElementById("imgList");
@@ -70,18 +71,37 @@
                for(var i = 0; i<allA.length;i++){
                 allA[i].num = i;
                 allA[i].onclick = function(){
+                       clearInterval(timer);
                        index = this.num;
-                       imgList.style.left = -520*index + "px";
+                       //imgList.style.left = -520*index + "px";
                        setA();
+                       move(imgList , "left" , -520*index , 20 , function(){
+							autoChange();
+						});
                    }
                }
+               autoChange();
+               
                function setA(){
-                   for(var i=0;i<allA.length;i++){
+                if(index >= imgArr.length - 1){
+						index = 0;
+						imgList.style.left = 0;
+					}
+                for(var i=0;i<allA.length;i++){
                        allA[i].style.backgroundColor = "";
                    }
                    allA[index].style.backgroundColor = "black";
                 }
-                                                            
+                var timer;
+                function autoChange(){
+					timer = setInterval(function(){
+						index++;
+						index %= imgArr.length;
+						move(imgList , "left" , -520*index , 20 , function(){
+							setA();
+						});						
+					},3000);
+                }                                                            
             }
     </script>
 </head>
@@ -93,6 +113,7 @@
             <li><img src="image/3.jpg" alt=""></li>
             <li><img src="image/4.jpg" alt=""></li>
             <li><img src="image/5.jpg" alt=""></li>
+            <li><img src="image/1.jpg" alt=""></li>
         </ul>
             
         <div id="navDiv">
