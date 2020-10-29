@@ -37,8 +37,7 @@
 
         #navDiv{
             position: absolute;
-            bottom: 15px;
-            left: 205px;
+            bottom: 15px;            
         }
 
         #navDiv a{
@@ -68,7 +67,21 @@
                var index = 0;
                var allA = document.getElementsByTagName("a");
                allA[index].style.backgroundColor = "black"; 
-               imgList.style.left = -520*imgArr[i]+"px";  
+               for(var i = 0; i<allA.length;i++){
+                allA[i].num = i;
+                allA[i].onclick = function(){
+                       index = this.num;
+                       imgList.style.left = -520*index + "px";
+                       setA();
+                   }
+               }
+               function setA(){
+                   for(var i=0;i<allA.length;i++){
+                       allA[i].style.backgroundColor = "";
+                   }
+                   allA[index].style.backgroundColor = "black";
+                }
+                                                            
             }
     </script>
 </head>
@@ -83,11 +96,11 @@
         </ul>
             
         <div id="navDiv">
-            <a href=""></a>
-            <a href=""></a>       
-            <a href=""></a>
-            <a href=""></a>
-            <a href=""></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>       
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
         </div>
     </div>  
 </body>
