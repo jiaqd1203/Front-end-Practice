@@ -55,6 +55,31 @@
             background-color: black;
         } 
 
+        button{
+        width: 25px;
+        height: 35px;
+        background-color: rgba(0, 0, 0, .25);
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        outline-style: none;
+        }
+
+        button:hover{
+            background-color: rgba(0,0,0,.5);
+        }
+
+        .btn-prev{
+            position: absolute;
+            left: 0;
+            top: 149px;    
+        }
+
+        .btn-next{
+            position: absolute;
+            left: 495px;
+            top: 149px;
+        }
     </style>
     <script type="text/javascript" src="/JS Animation Effects/tools.js"></script>
     <script type="text/javascript">
@@ -82,15 +107,47 @@
                }
                autoChange();
                
+               var prev = document.getElementsByClassName("btn-prev")[0];
+               prev.onclick = function(){
+                clearInterval(timer);
+                index--; 
+                
+                move(imgList , "left" , -520*index , 20 , function(){
+                    setB();
+                    autoChange();
+                    });
+               }
+               
+               var next = document.getElementsByClassName("btn-next")[0];
+               next.onclick = function(){
+                clearInterval(timer);
+                index++;   
+                move(imgList , "left" , -520*index , 20 , function(){
+                    setA();
+                    autoChange();
+					});
+               }
+               
                function setA(){
                 if(index >= imgArr.length - 1){
 						index = 0;
 						imgList.style.left = 0;
-					}
+                    }
+                          
                 for(var i=0;i<allA.length;i++){
                        allA[i].style.backgroundColor = "";
                    }
                    allA[index].style.backgroundColor = "black";
+                }
+                function setB(){                
+                if(index<=0){
+                    index = imgArr.length-1;
+                    imgList.style.left = -520*index+"px";                       
+                }               
+                for(var i=0;i<allA.length;i++){
+                       allA[i].style.backgroundColor = "";
+                   }
+                   allA[index].style.backgroundColor = "black";                  
                 }
                 var timer;
                 function autoChange(){
@@ -115,7 +172,8 @@
             <li><img src="image/5.jpg" alt=""></li>
             <li><img src="image/1.jpg" alt=""></li>
         </ul>
-            
+        <button class="btn-prev"><</button>
+        <button class="btn-next">></button>  
         <div id="navDiv">
             <a href="javascript:;"></a>
             <a href="javascript:;"></a>       
