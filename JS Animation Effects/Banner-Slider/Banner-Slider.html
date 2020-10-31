@@ -105,17 +105,25 @@
 						});
                    }
                }
-               autoChange();
+            autoChange();
                
                var prev = document.getElementsByClassName("btn-prev")[0];
                prev.onclick = function(){
                 clearInterval(timer);
-                index--; 
-                
+                index--;
+                if(index<0){
+                    index = imgArr.length-1;
+                    imgList.style.left = -520*index+"px";
+                    move(imgList , "left" , -520*(index-1) , 20 , function(){
+                    setA();
+                    autoChange();
+                    });                       
+                }else{                         
                 move(imgList , "left" , -520*index , 20 , function(){
-                    setB();
+                    setA();
                     autoChange();
                     });
+                 }    
                }
                
                var next = document.getElementsByClassName("btn-next")[0];
@@ -132,23 +140,13 @@
                 if(index >= imgArr.length - 1){
 						index = 0;
 						imgList.style.left = 0;
-                    }
-                          
+                    }    
                 for(var i=0;i<allA.length;i++){
                        allA[i].style.backgroundColor = "";
                    }
                    allA[index].style.backgroundColor = "black";
                 }
-                function setB(){                
-                if(index<=0){
-                    index = imgArr.length-1;
-                    imgList.style.left = -520*index+"px";                       
-                }               
-                for(var i=0;i<allA.length;i++){
-                       allA[i].style.backgroundColor = "";
-                   }
-                   allA[index].style.backgroundColor = "black";                  
-                }
+                
                 var timer;
                 function autoChange(){
 					timer = setInterval(function(){
