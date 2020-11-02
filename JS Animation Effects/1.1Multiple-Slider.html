@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        ul li{
+           width: 200px;
+           height: 100px;
+           background-color: yellow;
+           margin-bottom: 20px;
+           /* 加个透明度 */
+           filter:alpha(opacity=80);
+           opacity: 0.8; 
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            //多个li遍历数组
+            var aLi = document.getElementsByTagName('li');
+            for(var i=0;i<aLi.length;i++){
+               aLi[i].timer = null; 
+               aLi[i].onmouseover = function(){
+                //让当前的改变，而我们没法确认是哪个,用this   
+                   
+                   startMove(this,400);
+               }
+               aLi[i].onmouseout = function(){
+                   startMove(this,200);
+               }                
+            }
+        }
+        //var timer = null;
+        var alpha = 30;
+        //因为是多物体运动我们不知道用谁的值所以设置一个obj
+        function startMove(obj,target){
+            //我们清空的是整体的而不是分开的
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                //缓冲运动
+                var speed = (target - obj.offsetWidth)/8;
+                speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
+                if(obj.offsetWidth == target){
+                    clearInterval(obj.timer);
+                }else{
+                    obj.style.width = obj.offsetWidth + speed + 'px'; 
+                }
+            },30);
+        }
+    </script>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>
