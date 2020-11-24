@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>网页定位导航效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #content {
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #content h1 {
+            color: #0088bb;
+        }
+
+        #content .item {
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px dotted #0088bb;
+        }
+
+        #content .item h2 {
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 2px solid #0088bb;
+            margin-bottom: 10px;
+        }
+
+        #content .item li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        #content .item li a img {
+            width: 230px;
+            height: 230px;
+            border: none;
+        }
+
+        #menu {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            margin-left: 400px;
+            width: 50px;
+        }
+
+        #menu ul li a {
+            display: block;
+            margin: 5px 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            width: 80px;
+            height: 50px;
+            line-height: 50px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        #menu ul li a:hover,
+        #menu ul li a.current {
+            color: #fff;
+            background: #0088bb;
+        }
+        /*
+        处理ie6的兼容，基本不用了 
+        * html, * html body {
+            background-image: url(about:blank);
+            background-attachment: fixed;
+        }
+
+        * html #menu {
+            position: absolute;
+            bottom: auto;
+            top: expression(((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+100+'px');
+        }
+         */
+        
+    </style>
+    <script type="text/javascript">
+        // js没有add和removeclass这俩方法，所以我们要自己创建
+        /*function hasClass(obj,cls){
+            return obj.className.match(new RegExp("(\\s|^)" + cls + "(\\s|$)"));
+        }
+
+        function removeClass(obj,cls){
+            if(hasClass(obj,cls)){
+                //remove
+                var reg = new RegExp("(\\s|^)" + cls + "(\\s|$)");
+                obj.className = obj.className.replace(reg,"");
+            }
+        }
+
+        function addClass(obj,cls){
+            if(!hasClass(obj,cls)){
+                obj.className += "" +cls;
+            }
+        }*/
+        /*function getByClassName(obj, cls) {
+                var elements = obj.getElementsByTagName("*");
+                // 空数组
+                var result = [];
+                for (var i = 0; i < elements.length; i++) {
+                    if (elements[i].className == cls) {
+                        result.push(elements[i]);
+                    }
+                }
+                return result;
+            }*/
+            window.onload = function () {
+                // 触发窗口滚动事件
+                window.onscroll = function () {
+                    // 先判断看是不是有document.documentElement这样一个对象，Top等于scroll和网页顶端距离
+                    //Chrome只认document.body.scrollTop
+                    var top = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
+                    //五个定位
+                    var menus = document.getElementById("menu").getElementsByTagName("a");
+                    // var items = getByClassName(document.getElementById("content"), "item");
+                    // 五层楼
+                    var items = document.getElementsByClassName("item");
+                    //设置一个空ID一会用来储存id用
+                    var currentId = "";
+                    // 遍历五层楼
+                    for (var i = 0; i < items.length; i++) {
+                        // m储存五层楼,第一个，第二个，第三个...
+                        var m = items[i];
+                        // 每层楼距离网页顶端距离
+                        var itemTop = m.offsetTop;
+                        // 判断scroll的距离和楼层到顶部的距离，-300是让用户视觉体验更舒服点
+                        if (top > itemTop - 300) {
+                        //找到此时相对应的楼层的ID，也就是现在所在的是第几个item的id值
+                            currentId = m.id;
+                        } else {
+                        //退出    
+                            break;
+                        }
+                    }
+                    // 如果current不等于空？
+                    if (currentId) {
+                        //给正确的menu下的a元素class赋值
+                        for (var j = 0; j < menus.length; j++) {
+                            // n储存导航每一层的a，现在是第几个a
+                            var n = menus[j];
+                            // 通过这个获取到的是一个网址类型的值http：localhost....
+                            // 把href从#的位置分割开,也就是把网址后面的item12345分开，把这一长串储存到_href里
+                            var _href = n.href.split("#");
+                            // 判断这一长串的最后一个元素，也就是分开的item12345元素是否等于当前的楼层的item12345
+                            if (_href[_href.length - 1] != currentId) {
+                                //如果这俩不相等，把当前n的className去掉
+                                n.className = "";
+                            } else {
+                                //如果相等，当前的a后面class设置成current
+                                n.className = "current";
+                            }
+                        }
+                    }
+                }
+            }
+
+    </script>
+</head>
+<body>
+<div id="menu">
+    <ul>
+        <li><a href="#item1" class="current">1F 男装</a></li>
+        <li><a href="#item2">2F 女装</a></li>
+        <li><a href="#item3">3F 美妆</a></li>
+        <li><a href="#item4">4F 数码</a></li>
+        <li><a href="#item5">5F 母婴</a></li>
+    </ul>
+</div>
+<div id="content">
+    <h1>购物网</h1>
+    <div id="item1" class="item">
+        <h2>1F 男装</h2>
+        <ul>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/1F.jpg" alt=""/></a></li>
+        </ul>
+    </div>
+    <div id="item2" class="item">
+        <h2>2F 女装</h2>
+        <ul>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/2F.jpg" alt=""/></a></li>
+        </ul>
+    </div>
+    <div id="item3" class="item">
+        <h2>3F 美妆</h2>
+        <ul>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/3F.jpg" alt=""/></a></li>
+        </ul>
+    </div>
+    <div id="item4" class="item">
+        <h2>4F 数码</h2>
+        <ul>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+            <li><a href="#"><img src="image/4F.png" alt=""/></a></li>
+        </ul>
+    </div>
+    <div id="item5" class="item">
+        <h2>5F 母婴</h2>
+        <ul>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="image/5F.jpg" alt=""/></a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
