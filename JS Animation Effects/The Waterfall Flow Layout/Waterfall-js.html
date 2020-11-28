@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterfall Flow Layout</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #main{
+            position: relative;
+        }
+        .box{
+            padding: 15px 0 0 15px;
+            float: left;
+        }
+        .pic{
+            /* 我们一会要用js获取距离，所以用padding比margin好 */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius:5px;
+            box-shadow: 0 0 5px #ccc;
+        }
+        .pic img{
+            width: 165px;
+            /* auto是跟内容一样高，100%是跟父元素一样高 */
+            height: auto;
+        }
+    </style>
+    <script>
+       window.onload = function(){
+           waterfall('main','box');
+        //实现拖动滚动条的时候继续加载新的图片到尾部，创建一个滚动条方法
+        //要想加载，我们需要知道最后一张图片在哪里，当我们转动滚动条大概显示到页面的最后一张图片大概一半的位置时
+        // (或者最后一张图片一露面就加载也行，自己定)我们就可以让图片加载了
+        // 当全部图片顶部到最底下一张图片的一半的距离小于鼠标滚动的距离加上当前浏览器可视窗口的长度时，开始加载新图片块 
+            // 模拟数据库调用来的图片，此处我们是从本地调
+            var dataInt = {"data":[{"src":"images/0.jpg"},{"src":"images/1.jpg"},{"src":"images/2.jpg"},{"src":"images/3.jpg"}]}
+            window.onscroll=function(){
+                // 如果是真，就加载，加载的数据从后台过来，比如用json格式渲染到页面当中
+                if(checkScrollSlide()){
+                    // 先把这个取了一回应
+                    var oParent = document.getElementById('main');
+                    // 将数据块渲染到当页面的尾部,我们遍历的是data这个属性的值的数组
+                    for(var i=0;i<dataInt.data.length;i++){
+                        //渲染的意思就是我要把它塞到哪，我们要把它塞到box里面的pic里
+                        // 先创建一个div元素
+                        var oBox = document.createElement('div');
+                        //告诉浏览器盒子的类名
+                        oBox.className='box';
+                        // 把一个子元素添加到父元素的后面
+                        oParent.appendChild(oBox);
+                        //同样的方法我们再把oPic塞进oBox里 
+                        var oPic=document.createElement('div');
+                        oPic.className='pic';
+                        oBox.appendChild(oPic);
+                        // 再创建image
+                        var oImg=document.createElement('img');
+                        // 获取文件路径
+                        oImg.src=dataInt.data[i].src;
+                        console.log(oImg);
+                        oPic.appendChild(oImg);
+                        // 此时渲染加载完毕，但是这些加载的文件图片并没有按照瀑布流的方式排列
+                    }
+                    // 此时我们在外面再调用一下这个函数，让它以瀑布流方式排列
+                    waterfall('main','box');
+                }
+            }
+       }
+        //main是父元素，所以我们取个名叫parent
+       function waterfall(parent,box){
+        //将main下的所有class为box的元素取出来,这里id用传参的方式由parent来传
+        //肯定先拿到class才能操作，传的parent是谁，谁就是父元素
+        var oParent = document.getElementById(parent);
+        //用getByClass方法找到所有的class，返回一个数组
+        var oBoxs=getByClass(oParent,box);
+        //计算整个页面显示的列数（页面宽/每个box的宽）
+        //由于是等宽，所以得到一个的宽就行；offsetWidth获取元素的宽
+        var oBoxW = oBoxs[0].offsetWidth;
+        //floor是向下取整的方法，document.documentElement.clientWidth可见区域宽度
+        //除以每个图片宽度再向下取整就是可以容纳多少图片，一行，也就是列数column
+        var cols = Math.floor(document.documentElement.clientWidth/oBoxW);
+        //设置main的宽，把图片安放好，如果不设置宽度，列数就不会固定，style.cssText这个方法把css以字符串形式输入进来
+        // 下面这行就是设置整个的宽度并且居中，之后不管扩大缩小页面都是固定的列数了
+        oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto';
+        // 接下来，我们要知道第一行图片哪一个最短，然后接下来把下一张图片接到第一行最短的图片下面
+        //设置一个存放每一列图片高度的数组
+        var hArr=[];
+        //在满足i小于总列数条件的情况下把每一张图片的高度写进数组里
+        for(var i=0;i<oBoxs.length;i++){
+            if(i<cols){
+                // 把每一张图片的高度写进数组
+                hArr.push(oBoxs[i].offsetHeight);
+                //else就证明是下一行了
+        //搞定了第一行图片以后接下来我们要思考把第七张图片放在哪里，第二行第一张的高度top应该是第一行最矮的图片的高
+                // 从这里开始搞第二行
+            }else{
+                //Math.min(10,20,30)这方法可以求出一组数最小的一个10，但是这方法不能用在数组上，所以我们要加apply方法
+                // Math.min.apply()获取数组最小值的方法，第一个参数null，第二个是要找最小值的那个数组
+               var minH = Math.min.apply(null,hArr);
+               //接下来我要知道第一行中长度最小值的图片的索引
+               //告诉它我要在哪个数组中判断哪个值，var一个变量来接收getMinhIndex函数返回来的index值
+               var index = getMinhIndex(hArr,minH);
+               //知道了最小值和索引，接下来就可以改变盒子的位置了，我们给oBox[i]设置样式，把他放在最短的图片下面
+               oBoxs[i].style.position = 'absolute';
+               oBoxs[i].style.top=minH+'px';
+               //下面这两种方法都可以
+               //oBox[i].style.left=oBoxW*index+'px';
+               oBoxs[i].style.left=oBoxs[index].offsetLeft+'px';
+               //我们要改变数组的高度，否则接下来的图片全叠加到最短的图片那里了    
+               hArr[index]+=oBoxs[i].offsetHeight;
+            }
+        }
+        
+    }
+        //因为不只一个函数要用到取box的方法，所以我们把这个操作封装成一个函数
+        //根据class获取元素
+       function getByClass(parent,clsName){
+        //用来存储获取到的所有class为box的元素，class有很多个所以是数组
+        //var boxArr = [];
+        var boxArr = new Array();
+        //*表示获取所有的父元素的子元素标签
+        var oElements = parent.getElementsByTagName('*');
+        //遍历，把所有需要的标签找出来
+        for(var i=0;i<oElements.length;i++){
+            // 如果className等于box，把它放到数组里
+            if(oElements[i].className==clsName){
+                //push向数组末尾添加元素
+                boxArr.push(oElements[i]);
+            }
+        }
+        return boxArr;
+       }
+                       
+        //用两个参数接收传进来的值
+        function getMinhIndex(arr,val){
+            // for in是遍历数组内的元素或对象的属性
+            for(var i in arr){
+                // 当他遍历到一个元素的高度属性等于传进来的value值的时候
+                if(arr[i]==val){
+                    // 返回这个数组的索引
+                    return i;
+                }
+            }
+        }
+        // 检测是否具备滚条加载数据块图片的条件
+        function checkScrollSlide(){
+            // 再调用下父元素
+            var oParent = document.getElementById('main');
+            // 找到所有class是box的元素
+            var oBoxs = getByClass(oParent,'box');
+            // 计算并储存全部图片顶部到最底下一张图片的一半的距离
+            var lastBoxH = oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
+            // 混杂模式||标准模式求鼠标滚动的距离
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            // 混杂模式||标准模式求当前浏览器可视窗口的长度
+            var height = document.body.clientHeight || document.documentElement.clientHeight;
+            // 返回这俩相比较的结果
+            return (lastBoxH<scrollTop+height)?true:false;
+        }
+    </script>
+</head>
+<body>
+    <!-- 瀑布流原理我们加载图片的位置是经过我们计算用绝对定位的方式定位的， 
+    瀑布流特点等宽不等高
+    -->
+    <div id="main">
+        <div class="box">
+            <!-- 边框样式，此处使用padding而不是margin -->
+            <div class="pic">
+                <img src="images/0.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/1.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/2.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/3.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/4.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/5.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/6.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/7.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/8.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/9.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/10.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/11.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/12.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/13.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/14.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/15.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/16.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/17.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/18.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/19.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/20.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/21.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/22.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/23.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/24.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/25.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/26.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/27.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/28.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/29.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/30.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/31.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/32.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/33.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/34.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/35.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/36.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/37.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/38.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/39.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/40.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/41.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/42.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/43.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/44.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/45.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/46.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/47.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/48.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/49.jpg" alt="">
+            </div>
+        </div>
+        <div class="box">
+            <div class="pic">
+                <img src="images/50.jpg" alt="">
+            </div>
+        </div>
+</body>
+</html>
