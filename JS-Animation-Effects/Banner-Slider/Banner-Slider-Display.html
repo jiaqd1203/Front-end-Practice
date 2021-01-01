@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            
+        }
+        li{
+            list-style: none;
+        }
+        #outer{
+            padding: 10px 0;
+            background-color: greenyellow;
+            margin: 50px auto;
+            width: 520px;
+            height: 333px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #imgList{            
+            width: 2600px;
+            height: 333px;
+            position: absolute;
+            left: 0;            
+        }
+
+        #imgList li{
+            float: left;
+            margin: 0 10px;            
+        }
+
+        #navDiv{
+            position: absolute;
+            bottom: 15px;            
+        }
+
+        #navDiv a{
+            float: left;
+            width: 12px;
+            height: 12px;           
+            background-color: red;
+            margin: 0 5px;
+            opacity: 0.5;
+            /* IE8 */
+            filter: alpha(opacity=50);            
+        }
+
+        #navDiv a:hover{
+            background-color: black;
+        } 
+
+        button{
+        width: 25px;
+        height: 35px;
+        background-color: rgba(0, 0, 0, .25);
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        outline-style: none;
+        }
+
+        button:hover{
+            background-color: rgba(0,0,0,.5);
+        }
+
+        .btn-prev{
+            position: absolute;
+            left: 0;
+            top: 149px;    
+        }
+
+        .btn-next{
+            position: absolute;
+            left: 495px;
+            top: 149px;
+        }
+    </style>
+    <script type="text/javascript">
+           window.onload = function(){
+               var imgList = document.getElementById("imgList");
+               var imgArr = document.getElementsByTagName("img");
+               var navDiv = document.getElementById("navDiv");
+               var outer = document.getElementById("outer");
+               navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+               var index = 0;
+               var allA = document.getElementsByTagName("a");               
+               var next = document.getElementsByClassName("btn-next")[0];
+               allA[index].style.backgroundColor = "black";               
+                var timer;
+                function autoChange() {
+                   timer = setInterval(function () {
+                       index++;
+                       if (index > imgArr.length - 1) {
+                           index = 0;
+                       }
+                       for (var i = 0; i < imgArr.length - 1; i++) {
+                           imgArr[i].style.display = "none";
+                       }
+                       imgArr[index].style.display = "block";
+                   }, 2000)}
+                   autoChange();
+            }         
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <ul id="imgList">
+            <li><img src="image/1.jpg" alt=""></li>
+            <li><img src="image/2.jpg" alt=""></li>
+            <li><img src="image/3.jpg" alt=""></li>
+            <li><img src="image/4.jpg" alt=""></li>
+            <li><img src="image/5.jpg" alt=""></li>
+        </ul>
+        <button class="btn-prev"><</button>
+        <button class="btn-next">></button>  
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>       
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>  
+</body>
+</html>

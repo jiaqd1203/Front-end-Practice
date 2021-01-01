@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            
+        }
+        li{
+            list-style: none;
+        }
+        #outer{
+            padding: 10px 0;
+            background-color: greenyellow;
+            margin: 50px auto;
+            width: 520px;
+            height: 333px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #imgList{            
+            width: 2600px;
+            height: 333px;
+            position: absolute;
+            left: 0;            
+        }
+
+        #imgList li{
+            float: left;
+            margin: 0 10px;            
+        }
+
+        #navDiv{
+            position: absolute;
+            bottom: 15px;            
+        }
+
+        #navDiv a{
+            float: left;
+            width: 12px;
+            height: 12px;           
+            background-color: red;
+            margin: 0 5px;
+            opacity: 0.5;
+            /* IE8 */
+            filter: alpha(opacity=50);            
+        }
+
+        #navDiv a:hover{
+            background-color: black;
+        } 
+
+        button{
+        width: 25px;
+        height: 35px;
+        background-color: rgba(0, 0, 0, .25);
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        outline-style: none;
+        }
+
+        button:hover{
+            background-color: rgba(0,0,0,.5);
+        }
+
+        .btn-prev{
+            position: absolute;
+            left: 0;
+            top: 149px;    
+        }
+
+        .btn-next{
+            position: absolute;
+            left: 495px;
+            top: 149px;
+        }
+    </style>
+    <script type="text/javascript" src="/JS Animation Effects/tools.js"></script>
+    <script type="text/javascript">
+            window.onload=function(){
+               var imgList = document.getElementById("imgList");
+               var imgArr = document.getElementsByTagName("img");
+               imgList.style.width = 520*imgArr.length+"px";
+               var navDiv = document.getElementById("navDiv");
+               var outer = document.getElementById("outer");
+               navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+               var index = 0;
+               var allA = document.getElementsByTagName("a");
+               allA[index].style.backgroundColor = "black"; 
+               for(var i = 0; i<allA.length;i++){
+                allA[i].num = i;
+                allA[i].onclick = function(){
+                       clearInterval(timer);
+                       index = this.num;
+                       //imgList.style.left = -520*index + "px";
+                       setA();
+                       move(imgList , "left" , -520*index , 20 , function(){
+							autoChange();
+						});
+                   }
+               }
+                autoChange();               
+               var prev = document.getElementsByClassName("btn-prev")[0];
+               prev.onclick = function(){
+                clearInterval(timer);
+                index--;
+                if(index<0){
+                    index = imgArr.length-1;
+                    imgList.style.left = -520*index+"px";
+                    move(imgList , "left" , -520*(index-1) , 20 , function(){
+                    setA();
+                    autoChange();
+                    });                       
+                }else{                         
+                move(imgList , "left" , -520*index , 20 , function(){
+                    setA();
+                    autoChange();
+                    });
+                 }    
+               }
+               
+               var next = document.getElementsByClassName("btn-next")[0];
+               next.onclick = function(){
+                clearInterval(timer);
+                index++;   
+                move(imgList , "left" , -520*index , 20 , function(){
+                    setA();
+                    autoChange();
+					});
+               }
+               
+               function setA(){
+                if(index >= imgArr.length - 1){
+						index = 0;
+						imgList.style.left = 0;
+                    }    
+                for(var i=0;i<allA.length;i++){
+                       allA[i].style.backgroundColor = "";
+                   }
+                   allA[index].style.backgroundColor = "black";
+                }
+                
+                var timer;
+                function autoChange(){
+					timer = setInterval(function(){
+						index++;
+						index %= imgArr.length;
+						move(imgList , "left" , -520*index , 20 , function(){
+							setA();
+						});						
+					},3000);
+                }                                                            
+            }
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <ul id="imgList">
+            <li><img src="image/1.jpg" alt=""></li>
+            <li><img src="image/2.jpg" alt=""></li>
+            <li><img src="image/3.jpg" alt=""></li>
+            <li><img src="image/4.jpg" alt=""></li>
+            <li><img src="image/5.jpg" alt=""></li>
+            <li><img src="image/1.jpg" alt=""></li>
+        </ul>
+        <button class="btn-prev"><</button>
+        <button class="btn-next">></button>  
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>       
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>  
+</body>
+</html>
