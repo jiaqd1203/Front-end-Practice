@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }       
+        li{
+           width: 200px;
+           height: 100px;
+           background-color: yellow;
+           margin-bottom: 20px;           
+           border: 4px solid #000;
+           list-style: none;
+           filter:alpha(opacity=30);
+           opacity: 0.3;
+        }
+    </style>
+    <script src="3.3move(json).js"></script>
+    <script>
+    /*
+    var json = {a:12,b:13};
+    for(var i in json){
+        alert(json[i]);
+    }
+    
+    */    
+        window.onload = function(){
+        var Li = document.getElementById('li1');
+        //如果把宽设置成201，会发现移入的时候宽变成201了，但是高和透明度远远没达到要求
+        //原因是js检测停止的部分，只要有一个达到要求就会停止，而不是全部达到要求才停止
+        Li.onmouseover = function(){
+            startMove(Li,{width:400,height:200,opacity:100});            
+        }
+        Li.onmouseout = function(){
+            startMove(Li,{width:200,height:100,opacity:30});            
+        }
+    }
+    </script>
+</head>
+<body>
+    <ul>
+        <li id="li1"></li>
+    </ul>
+</body>
+</html>
