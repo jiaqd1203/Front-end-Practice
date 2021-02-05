@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>二级菜单SecondaryNav</title>
+		<title>二级菜单SecondaryMenu</title>
 		<style type="text/css">
 			*{
 				margin: 0;
@@ -19,30 +19,31 @@
 			body{
 				font: 12px/180% Arial;
 			}
-			div.sdmenu{
+			
+			.sdmenu{
 				width: 150px;
 				margin: 0 auto;
 				font-family: Arial, sans-serif;
 				font-size: 12px;
 				padding-bottom: 10px;
-				background: url(bottom.gif) no-repeat right bottom;
+				background: url(https://github.com/jiaqd1203/Front-end-Practice/blob/main/SecondaryMenu/img/bottom.gif?raw=true) no-repeat right bottom;
 				color: #fff;
 			}
 
-			div.sdmenu div {
-				background: url(title.gif) repeat-x;
+			.sdmenu div{
+				background: url(https://github.com/jiaqd1203/Front-end-Practice/blob/main/SecondaryMenu/img/title.gif?raw=true) repeat-x;
 				overflow: hidden;
 			}
 
-			div.sdmenu div:first-child {
-				background: url(toptitle.gif) no-repeat;
+			.sdmenu div:first-child{
+				background: url(https://github.com/jiaqd1203/Front-end-Practice/blob/main/SecondaryMenu/img/toptitle.gif?raw=true) no-repeat;
 			}
 
-			div.sdmenu div.collapsed {
+			.sdmenu .collapsed{
 				height: 25px;
 			}
 
-			div.sdmenu div span {
+			.sdmenu div span{
 				display: block;
 				height: 15px;
 				line-height: 15px;
@@ -50,16 +51,16 @@
 				padding: 5px 25px;
 				font-weight: bold;
 				color: white;
-				background: url(expanded.gif) no-repeat 10px center;
+				background: url(https://github.com/jiaqd1203/Front-end-Practice/blob/main/SecondaryMenu/img/expanded.gif?raw=true) no-repeat 10px center;
 				cursor: pointer;
 				border-bottom: 1px solid #ddd;
 			}
 
-			div.sdmenu div.collapsed span {
-				background-image: url(collapsed.gif);
+			.sdmenu .collapsed span {
+				background-image: url(https://github.com/jiaqd1203/Front-end-Practice/blob/main/SecondaryMenu/img/collapsed.gif?raw=true);
 			}
 
-			div.sdmenu div a {
+			.sdmenu div a {
 				padding: 5px 10px;
 				background: #eee;
 				display: block;
@@ -67,26 +68,52 @@
 				color: #066;
 			}
 
-			div.sdmenu div a.current {
+			.sdmenu div a.current {
 				background: #ccc;
 			}
 
-			div.sdmenu div a:hover {
-				background: #066 url(linkarrow.gif) no-repeat right center;
+			.sdmenu div a:hover {
+				background: #066 url(https://github.com/jiaqd1203/Front-end-Practice/blob/main/SecondaryMenu/img/linkarrow.gif?raw=true) no-repeat right center;
 				color: #fff;
 				text-decoration: none;
 			}
 	</style>	
-	<script type="text/javascript" src="js/tools.js"></script>
+	<script type="text/javascript" src="tools.js"></script>
 	<script type="text/javascript">
+window.onload = function(){
+			/*我们的每一个菜单都是一个div,当div具有collapsed这个类时，div就是折叠的状态
+		  	当div没有这个类时，div就是展开的状态*/
+			//点击菜单，切换菜单的显示状态
+			//获取所有的class为menuSpan的元素
+			var menuSpan = document.getElementsByClassName("menuSpan");
+			//定义一个变量，来保存当前展开的菜单，默认的展开菜单是第一个
+			var openDiv = menuSpan[0].parentNode;
+			//为span绑定单击响应函数
+			for(var i=0; i<menuSpan.length; i++){
+				menuSpan[i].onclick = function(){
+				//this代表我当前点击的span，parentNode节点的父节点，获取当前span的父元素
+				var parentDiv = this.parentNode;
+				//切换菜单的显示状态
+				toggleClass(parentDiv,'collapsed');
+				//判断openDiv和parentDiv是否相同
+				/*if(openDiv != parentDiv){addClass(openDiv,'collapsed');}
+				可以这么写，但是为了可以统一处理动画过渡效果（让它慢慢打开），
+				我们希望在这将addClass改为toggleClass，让他俩保持一致，
+				此处toggleClass()不需要有移除的功能*/		
+				if(openDiv != parentDiv  && !hasClass(openDiv, "collapsed")){
+				//打开新菜单以后应该关闭之前打开的菜单		
+				toggleClass(openDiv,"collapsed");
+				}				
+				//修改openDiv为当前打开的菜单，当前操作的是parentDiv
+				openDiv = parentDiv;				
+				};
+			}
+		}
 
-
-
+		
 	</script>
 	</head>
-
 	<body>
-
 		<div id="my_menu" class="sdmenu">
 			<div>
 				<span class="menuSpan">在线工具</span>
