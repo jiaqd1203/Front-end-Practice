@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FlexMenu</title>
+	<style>
+    *{  
+       margin: 0; 
+       padding: 0; 
+    }
+
+    body{ 
+        background: #f0f0f0; 
+    }
+
+    ul{ 
+        width: 200px; 
+        margin: 300px auto; 
+        list-style: none; 
+        text-align: center;
+        background-color: #fff; 
+    }
+
+    li{ 
+        width: 50px; 
+        height: 50px; 
+        position: relative; 
+        background: #aaa; 
+    }
+
+    ul li:hover{ 
+        width: 200px; 
+        transition:all ease 0.5s;
+    }
+
+    a{ 
+        text-decoration: none; 
+        color: #000; 
+        display: block; 
+        width: 150px; 
+        line-height: 50px; 
+        position: absolute; 
+        left: 50px; 
+        top: 0; 
+    }
+
+    a:hover{ 
+        color: #fff; 
+    }
+		
+	li:nth-child(1){ 
+        background:#d3540b;
+    }
+	li:nth-child(2){ 
+        background:#0b99eb;
+    }
+	li:nth-child(3){ 
+        background: #f3be10;
+    }
+	li:nth-child(4){ 
+        background:#370399;
+    }
+	li:nth-child(5){ 
+        background:#ee13be;
+    }
+	
+	
+	</style>
+</head>
+<body>
+	<ul>
+		<li><a href="#">Html</a></li>
+		<li><a href="#">Css</a></li>
+		<li><a href="#">Js</a></li>
+		<li><a href="#">Bootstrap</a></li>
+		<li><a href="#">Saas</a></li>
+	</ul>
+</body>
+</html>
