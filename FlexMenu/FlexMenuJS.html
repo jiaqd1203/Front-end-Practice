@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FlexMenu</title>
+	<style>
+    *{  
+       margin: 0; 
+       padding: 0; 
+    }
+
+    body{ 
+        background: #f0f0f0; 
+    }
+
+    ul{ 
+        width: 200px; 
+        margin: 300px auto; 
+        list-style: none; 
+        text-align: center;
+        background-color: #fff; 
+    }
+
+    li{ 
+        width: 100px; 
+        height: 50px; 
+        background: #aaa; 
+    }
+
+    a{ 
+        text-decoration: none; 
+        color: #000; 
+        display: block; 
+        width: 150px; 
+        line-height: 50px;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    a:hover{ 
+        color: #fff; 
+    }
+		
+	li:nth-child(1){ 
+        background:#d3540b;
+    }
+	li:nth-child(2){ 
+        background:#0b99eb;
+    }
+	li:nth-child(3){ 
+        background: #f3be10;
+    }
+	li:nth-child(4){ 
+        background:#370399;
+    }
+	li:nth-child(5){ 
+        background:#ee13be;
+    }		
+	</style>
+    <script>
+        window.onload = function(){
+           var aUl = document.getElementsByTagName('ul')[0];
+           var aLi = aUl.getElementsByTagName('li');
+           for (var i = 0; i < aLi.length; i++){
+                aLi[i].timer = null;    
+                aLi[i].onmouseover = function(){
+                    startMove(this, 200);
+                };
+                aLi[i].onmouseout = function(){
+                    startMove(this, 100);
+                }
+            }
+            function startMove(obj, target){
+                clearInterval(obj.timer);
+                obj.timer = setInterval(function(){
+                    var speed = (target - obj.offsetWidth)/8;
+                    speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
+                    if(obj.offsetWidth == target){
+                        clearInterval(obj.timer);
+                    }else{
+                        obj.style.width = obj.offsetWidth + speed + 'px'; 
+                    }
+                }, 30)
+                }            
+            }    
+    </script>
+</head>
+<body>
+	<ul>
+		<li><a href="#">Html</a></li>
+		<li><a href="#">Css</a></li>
+		<li><a href="#">Js</a></li>
+		<li><a href="#">Bootstrap</a></li>
+		<li><a href="#">Saas</a></li>
+	</ul>
+</body>
+</html>
