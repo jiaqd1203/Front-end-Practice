@@ -5,7 +5,35 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RippleButton</title>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 	<style>
+        *{
+			margin: 0;
+			padding: 0;
+		}
+		ul {
+		/* 父元素font-size:0;子元素单独设置大小解决inline-block空白间隙问题 */
+          font-size: 0;
+          padding: 0;
+		  width: 480px;
+		  margin: 100px auto;
+		}
+		li {
+		  display: inline-block;
+		  width: 160px;
+		  height: 60px;
+		  background: #2376e2;
+		  font-size: 16px;
+		  text-align: center;
+		  line-height: 60px;
+		  color: #fff;
+		  position: relative;
+		  overflow: hidden;
+		  cursor: pointer;
+		}     
+		    
+		
+		   
 
 	</style>
 	<script>
