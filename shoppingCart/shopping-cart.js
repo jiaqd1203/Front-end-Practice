@@ -21,7 +21,7 @@ window.onload = function(){
                 // cells 集合返回表格行中所有 <td> 或 <th> 元素的个数,parseFloat转换成小数
                 price += parseFloat(tr[i].cells[4].innerHTML)
                 // 选择物品以后浮层显示的东西
-                HTMLstr += '<div><img src="' + tr[i].getElementsByTagName('img')[0].src + '"><span class="del" index="' + i + '">取消选择</span></div>'
+                HTMLstr += '<div><img src="' + tr[i].getElementsByTagName('img')[0].src + '"><span class="del" index="' + i + '">Cancel</span></div>'
             }else{
                 tr[i].className = '';
             }
@@ -143,7 +143,7 @@ window.onload = function(){
                         getSubTotal(this);
                         break;
                     case 'delete':
-                        var conf = confirm('确定要删除吗？');
+                        var conf = confirm('Are you sure？');
                         if (conf) {
 
                             this.parentNode.removeChild(this);
@@ -180,7 +180,7 @@ window.onload = function(){
         deleteAll.onclick = function () {
             // 如果等于0就什么都不做
             if (selectedTotal.innerHTML != '0') {
-                var conf = confirm('确定删除吗？');
+                var conf = confirm('Are you sure？');
                 if (conf) {
                     for (var i = 0; i < tr.length; i++) {
                         var input = tr[i].getElementsByTagName('input')[0];
