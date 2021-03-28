@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CategoryNavigation</title>
+</head>
+
+<body>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+            font-size: 10px;
+        }
+
+        .topmenu{
+            display: block;
+            width: 120px;
+            border: 2px solid rgb(72, 85, 160);
+            ;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toptitle{
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            color: White;
+            background: rgb(72, 85, 160);
+        }
+
+        .topmenu li{
+            height: 30px;
+            line-height: 30px;
+            list-style-type: none;
+            text-align: left;
+            padding-left: 8px;
+            /* box-sizing: border-box; */
+        }
+
+        .topmenu li a{
+            text-decoration: none;
+            color: #313131;
+        }
+
+        .topmenu li a:hover{
+            text-decoration: underline;
+            font-weight: bold;
+            color: rgb(72, 85, 160);
+        }
+
+        .topmenu .lihover{
+            border: 1px solid #DDD;
+            border-right: 0;
+            box-shadow: 0 0 8px #DDD;
+            -moz-box-shadow: 0 0 8px #DDD;
+            -webkit-box-shadow: 0 0 8px #DDD;
+            height: 30px;
+            /* 左边发亮的边框 */
+            border-left: 4px solid rgb(72, 85, 160);
+        }
+
+        /*悬浮菜单*/
+        .topmenu .lihover .submenu{
+            display: block;
+        }
+
+        /*白色小方框挡住一级菜单右边的border*/
+        .topmenu .lihover span{
+            background: white;
+            /* display: inline-block; */
+            z-index: 20;
+            width: 20px;
+            height: 30px;
+            float: right;
+            position: relative;
+        }
+
+        .submenu{
+            display: none;
+            left: 120px;
+            position: absolute;
+            top: 42px;
+            border: 1px solid #DDD;
+            z-index: 4;
+            background: white;
+            box-shadow: 0 0 8px #DDD;
+            -moz-box-shadow: 0 0 8px #DDD;
+            -webkit-box-shadow: 0 0 8px #DDD;
+        }
+
+        .leftdiv{
+            float: left;
+            width: 420px;
+            margin: 5px;
+        }
+
+        .leftdiv dl{
+            display: block;
+            padding-bottom: 6px;
+            overflow: hidden;
+        }
+
+        .leftdiv dl dt{
+            display: block;
+            float: left;
+            width: 80px;
+            text-align: left;
+            height: 20px;
+            line-height: 20px;
+            padding-right: 6px;
+        }
+
+        .leftdiv dl dt a{
+            color: rgb(72, 85, 160);
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .leftdiv dl dd{
+            display: block;
+            overflow: hidden;
+        }
+
+        .leftdiv dl dd a{
+            display: block;
+            float: left;
+            border-left: 1px solid #CCC;
+            color: #737373;
+            font-size: 9px;
+            padding: 0 8px;
+            height: 14px;
+            line-height: 14px;
+            margin: 4px 0;
+        }
+    </style>
+    </head>
+
+    <body>
+        <script type="text/javascript">
+            window.onload = function () {
+                var Lis = document.getElementsByTagName("li");
+                for (i = 0; i < Lis.length; i++){                    
+                    Lis[i].onmouseover = function () {
+                        this.className = "lihover";
+                    }
+                    Lis[i].onmouseout = function () {
+                        this.className = "";
+                    }
+                }
+            }
+        </script>
+        <ul class="topmenu">
+            <div class="toptitle">
+                Computing
+            </div>
+            <li><a href="#">Laptops</a><span></span>
+                <div class="submenu">
+                    <div class="leftdiv">
+                        <dl>
+                            <dt><a href="#">All laptops</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Windows</a></dt>
+                            <dd>
+                                <a href="#">HP</a>
+                                <a href="#">Lenovo</a>
+                                <a href="#">Dell</a>
+                                <a href="#">Acer</a>
+                                <a href="#">Asus</a>
+                                <a href="#">Windows 10 Pro</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Macbook</a></dt>
+                            <dd>
+                                <a href="#">Macbook Pro</a>
+                                <a href="#">Macbook Air</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Chromebooks</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Microsoft Surface</a></dt>
+                            <dd>
+                                <a href="#">Surface Pro</a>
+                                <a href="#">Surface Book</a>
+                                <a href="#">Surface Go</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">2 in 1 laptops</a></dt>
+                        </dl>
+                        <dl class="fore7">
+                            <dt><a href="#">Gaming laptops</a></dt>
+                        </dl>
+            <li><a href="#">Laptops</a><span></span>
+                <div class="submenu">
+                    <div class="leftdiv">
+                        <dl>
+                            <dt><a href="#">All laptops</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Windows</a></dt>
+                            <dd>
+                                <a href="#">HP</a>
+                                <a href="#">Lenovo</a>
+                                <a href="#">Dell</a>
+                                <a href="#">Acer</a>
+                                <a href="#">Asus</a>
+                                <a href="#">Windows 10 Pro</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Macbook</a></dt>
+                            <dd>
+                                <a href="#">Macbook Pro</a>
+                                <a href="#">Macbook Air</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Chromebooks</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Microsoft Surface</a></dt>
+                            <dd>
+                                <a href="#">Surface Pro</a>
+                                <a href="#">Surface Book</a>
+                                <a href="#">Surface Go</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">2 in 1 laptops</a></dt>
+                        </dl>
+                        <dl class="fore7">
+                            <dt><a href="#">Gaming laptops</a></dt>
+                        </dl>
+                    </div>
+                </div>
+            </li>                    
+            <li><a href="#">Laptops</a><span></span>
+                <div class="submenu">
+                    <div class="leftdiv">
+                        <dl>
+                            <dt><a href="#">All laptops</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Windows</a></dt>
+                            <dd>
+                                <a href="#">HP</a>
+                                <a href="#">Lenovo</a>
+                                <a href="#">Dell</a>
+                                <a href="#">Acer</a>
+                                <a href="#">Asus</a>
+                                <a href="#">Windows 10 Pro</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Macbook</a></dt>
+                            <dd>
+                                <a href="#">Macbook Pro</a>
+                                <a href="#">Macbook Air</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Chromebooks</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Microsoft Surface</a></dt>
+                            <dd>
+                                <a href="#">Surface Pro</a>
+                                <a href="#">Surface Book</a>
+                                <a href="#">Surface Go</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </li>            
+            <li><a href="#">Laptops</a><span></span>
+                <div class="submenu">
+                    <div class="leftdiv">
+                        <dl>
+                            <dt><a href="#">All laptops</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Windows</a></dt>
+                            <dd>
+                                <a href="#">HP</a>
+                                <a href="#">Lenovo</a>
+                                <a href="#">Dell</a>
+                                <a href="#">Acer</a>
+                                <a href="#">Asus</a>
+                                <a href="#">Windows 10 Pro</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Macbook</a></dt>
+                            <dd>
+                                <a href="#">Macbook Pro</a>
+                                <a href="#">Macbook Air</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Chromebooks</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Microsoft Surface</a></dt>
+                            <dd>
+                                <a href="#">Surface Pro</a>
+                                <a href="#">Surface Book</a>
+                                <a href="#">Surface Go</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">2 in 1 laptops</a></dt>
+                        </dl>
+                        <dl class="fore7">
+                            <dt><a href="#">Gaming laptops</a></dt>
+                        </dl>
+                    </div>
+                </div>
+            </li>            
+            <li><a href="#">Laptops</a><span></span>
+                <div class="submenu">
+                    <div class="leftdiv">
+                        <dl>
+                            <dt><a href="#">All laptops</a></dt>
+                        </dl>
+                    </div>
+                </div>
+            </li>  
+            <li><a href="#">Laptops</a><span></span>
+                <div class="submenu">
+                    <div class="leftdiv">
+                        <dl>
+                            <dt><a href="#">All laptops</a></dt>
+                        </dl>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">Laptops</a><span></span>
+                <div class="submenu">
+                    <div class="leftdiv">
+                        <dl>
+                            <dt><a href="#">All laptops</a></dt>
+                        </dl>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#">Laptops</a><span></span>
+                <div class="submenu">
+                    <div class="leftdiv">
+                        <dl>
+                            <dt><a href="#">All laptops</a></dt>
+                        </dl>
+                    </div>
+                </div>
+            </li>
+                                                 
+        </ul>
+    </body>
+</body>
+
+</html>
