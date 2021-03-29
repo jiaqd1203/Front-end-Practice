@@ -19,8 +19,7 @@
         .topmenu{
             display: block;
             width: 120px;
-            border: 2px solid rgb(72, 85, 160);
-            ;
+            border: 2px solid rgb(72, 85, 160);            
             margin: 0;
             padding: 0;
         }
@@ -54,89 +53,63 @@
             color: rgb(72, 85, 160);
         }
 
-        .topmenu .lihover{
-            border: 1px solid #DDD;
-            border-right: 0;
-            box-shadow: 0 0 8px #DDD;
-            -moz-box-shadow: 0 0 8px #DDD;
-            -webkit-box-shadow: 0 0 8px #DDD;
-            height: 30px;
-            /* 左边发亮的边框 */
-            border-left: 4px solid rgb(72, 85, 160);
-        }
 
         /*悬浮菜单*/
         .topmenu .lihover .submenu{
             display: block;
         }
 
-        /*白色小方框挡住一级菜单右边的border*/
-        .topmenu .lihover span{
-            background: white;
-            /* display: inline-block; */
-            z-index: 20;
-            width: 20px;
-            height: 30px;
-            float: right;
-            position: relative;
-        }
 
         .submenu{
             display: none;
-            left: 120px;
+            left: 122px;
             position: absolute;
-            top: 42px;
-            border: 1px solid #DDD;
+            top: 40px;
+            border: 2px solid rgb(72, 85, 160);
             z-index: 4;
             background: white;
-            box-shadow: 0 0 8px #DDD;
-            -moz-box-shadow: 0 0 8px #DDD;
-            -webkit-box-shadow: 0 0 8px #DDD;
-        }
-
-        .leftdiv{
-            float: left;
+            height: 240px;
             width: 420px;
-            margin: 5px;
         }
 
-        .leftdiv dl{
-            display: block;
-            padding-bottom: 6px;
-            overflow: hidden;
+        .submenu dl{
+            height: 30px;
+            line-height: 30px;
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
-        .leftdiv dl dt{
-            display: block;
-            float: left;
-            width: 80px;
-            text-align: left;
-            height: 20px;
-            line-height: 20px;
-            padding-right: 6px;
+        .submenu dl dt{
+            float: left;            
+            height: 30px;
+            line-height: 30px;
+            margin-left: 8px;
+            margin-right: 8px;
         }
 
-        .leftdiv dl dt a{
+        .submenu dl dt a{
             color: rgb(72, 85, 160);
             font-weight: bold;
             text-decoration: underline;
         }
 
-        .leftdiv dl dd{
-            display: block;
-            overflow: hidden;
+        .submenu dl dd{
+            float: left;
+            height: 30px;
+            line-height: 30px;
+            margin-left: 10px;
         }
 
-        .leftdiv dl dd a{
+        .submenu dl dd a{
             display: block;
             float: left;
+            height: 9px;
+            line-height: 9px;
             border-left: 1px solid #CCC;
             color: #737373;
             font-size: 9px;
             padding: 0 8px;
-            height: 14px;
-            line-height: 14px;
-            margin: 4px 0;
+            margin: 10.5px auto;
         }
     </style>
     </head>
@@ -161,7 +134,7 @@
             </div>
             <li><a href="#">Laptops</a><span></span>
                 <div class="submenu">
-                    <div class="leftdiv">
+                    
                         <dl>
                             <dt><a href="#">All laptops</a></dt>
                         </dl>
@@ -197,12 +170,14 @@
                         <dl>
                             <dt><a href="#">2 in 1 laptops</a></dt>
                         </dl>
-                        <dl class="fore7">
+                        <dl>
                             <dt><a href="#">Gaming laptops</a></dt>
                         </dl>
+                </div>
+            </li>
             <li><a href="#">Laptops</a><span></span>
                 <div class="submenu">
-                    <div class="leftdiv">
+                    
                         <dl>
                             <dt><a href="#">All laptops</a></dt>
                         </dl>
@@ -238,15 +213,15 @@
                         <dl>
                             <dt><a href="#">2 in 1 laptops</a></dt>
                         </dl>
-                        <dl class="fore7">
+                        <dl>
                             <dt><a href="#">Gaming laptops</a></dt>
                         </dl>
-                    </div>
+                    
                 </div>
             </li>                    
             <li><a href="#">Laptops</a><span></span>
                 <div class="submenu">
-                    <div class="leftdiv">
+                    
                         <dl>
                             <dt><a href="#">All laptops</a></dt>
                         </dl>
@@ -279,12 +254,12 @@
                                 <a href="#">Surface Go</a>
                             </dd>
                         </dl>
-                    </div>
+                    
                 </div>
             </li>            
             <li><a href="#">Laptops</a><span></span>
                 <div class="submenu">
-                    <div class="leftdiv">
+                    
                         <dl>
                             <dt><a href="#">All laptops</a></dt>
                         </dl>
@@ -320,46 +295,114 @@
                         <dl>
                             <dt><a href="#">2 in 1 laptops</a></dt>
                         </dl>
-                        <dl class="fore7">
+                        <dl>
                             <dt><a href="#">Gaming laptops</a></dt>
                         </dl>
-                    </div>
+                    
                 </div>
             </li>            
             <li><a href="#">Laptops</a><span></span>
                 <div class="submenu">
-                    <div class="leftdiv">
+                    
                         <dl>
                             <dt><a href="#">All laptops</a></dt>
                         </dl>
-                    </div>
+                    
                 </div>
             </li>  
             <li><a href="#">Laptops</a><span></span>
                 <div class="submenu">
-                    <div class="leftdiv">
+                    
                         <dl>
                             <dt><a href="#">All laptops</a></dt>
                         </dl>
-                    </div>
+                        <dl>
+                            <dt><a href="#">Windows</a></dt>
+                            <dd>
+                                <a href="#">HP</a>
+                                <a href="#">Lenovo</a>
+                                <a href="#">Dell</a>
+                                <a href="#">Acer</a>
+                                <a href="#">Asus</a>
+                                <a href="#">Windows 10 Pro</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Macbook</a></dt>
+                            <dd>
+                                <a href="#">Macbook Pro</a>
+                                <a href="#">Macbook Air</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Chromebooks</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Microsoft Surface</a></dt>
+                            <dd>
+                                <a href="#">Surface Pro</a>
+                                <a href="#">Surface Book</a>
+                                <a href="#">Surface Go</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">2 in 1 laptops</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Gaming laptops</a></dt>
+                        </dl>
                 </div>
             </li>
             <li><a href="#">Laptops</a><span></span>
                 <div class="submenu">
-                    <div class="leftdiv">
+                    
                         <dl>
                             <dt><a href="#">All laptops</a></dt>
                         </dl>
-                    </div>
+                    
                 </div>
             </li>
             <li><a href="#">Laptops</a><span></span>
                 <div class="submenu">
-                    <div class="leftdiv">
+                    
                         <dl>
                             <dt><a href="#">All laptops</a></dt>
                         </dl>
-                    </div>
+                        <dl>
+                            <dt><a href="#">Windows</a></dt>
+                            <dd>
+                                <a href="#">HP</a>
+                                <a href="#">Lenovo</a>
+                                <a href="#">Dell</a>
+                                <a href="#">Acer</a>
+                                <a href="#">Asus</a>
+                                <a href="#">Windows 10 Pro</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Macbook</a></dt>
+                            <dd>
+                                <a href="#">Macbook Pro</a>
+                                <a href="#">Macbook Air</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Chromebooks</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Microsoft Surface</a></dt>
+                            <dd>
+                                <a href="#">Surface Pro</a>
+                                <a href="#">Surface Book</a>
+                                <a href="#">Surface Go</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">2 in 1 laptops</a></dt>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">Gaming laptops</a></dt>
+                        </dl>
                 </div>
             </li>
                                                  
