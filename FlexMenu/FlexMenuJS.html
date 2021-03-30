@@ -75,6 +75,7 @@
                 clearInterval(obj.timer);
                 obj.timer = setInterval(function(){
                     var speed = (target - obj.offsetWidth)/8;
+                    // ceil向上取整，floor像下取整，round四舍五入
                     speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
                     if(obj.offsetWidth == target){
                         clearInterval(obj.timer);
