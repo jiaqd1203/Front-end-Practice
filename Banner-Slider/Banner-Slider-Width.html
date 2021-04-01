@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="tools.js"></script>
+    <script type="text/javascript" src="Banner-Slider.js"></script>
     <title>Slider</title>
     <style>
         *{
@@ -81,18 +83,10 @@
             top: 149px;
         }
     </style>
-    <script type="text/javascript" src="/JS Animation Effects/tools.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript"> 
             window.onload=function(){
-               var imgList = document.getElementById("imgList");
-               var imgArr = document.getElementsByTagName("img");
-               imgList.style.width = 520*imgArr.length+"px";
-               var navDiv = document.getElementById("navDiv");
-               var outer = document.getElementById("outer");
-               navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
-               var index = 0;
-               var allA = document.getElementsByTagName("a");
-               allA[index].style.backgroundColor = "black"; 
+               
+               
                for(var i = 0; i<allA.length;i++){
                 allA[i].num = i;
                 allA[i].onclick = function(){
@@ -157,7 +151,7 @@
 					},3000);
                 }                                                            
             }
-    </script>
+    </script>-->
 </head>
 <body>
     <div id="outer">
