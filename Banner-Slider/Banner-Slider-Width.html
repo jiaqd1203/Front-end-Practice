@@ -71,87 +71,18 @@
             background-color: rgba(0,0,0,.5);
         }
 
-        .btn-prev{
+        #btn-prev{
             position: absolute;
             left: 0;
             top: 149px;    
         }
 
-        .btn-next{
+        #btn-next{
             position: absolute;
             left: 495px;
             top: 149px;
         }
-    </style>
-    <!-- <script type="text/javascript"> 
-            window.onload=function(){
-               
-               
-               for(var i = 0; i<allA.length;i++){
-                allA[i].num = i;
-                allA[i].onclick = function(){
-                       clearInterval(timer);
-                       index = this.num;
-                       //imgList.style.left = -520*index + "px";
-                       setA();
-                       move(imgList , "left" , -520*index , 20 , function(){
-							autoChange();
-						});
-                   }
-               }
-                autoChange();               
-               var prev = document.getElementsByClassName("btn-prev")[0];
-               prev.onclick = function(){
-                clearInterval(timer);
-                index--;
-                if(index<0){
-                    index = imgArr.length-1;
-                    imgList.style.left = -520*index+"px";
-                    move(imgList , "left" , -520*(index-1) , 20 , function(){
-                    setA();
-                    autoChange();
-                    });                       
-                }else{                         
-                move(imgList , "left" , -520*index , 20 , function(){
-                    setA();
-                    autoChange();
-                    });
-                 }    
-               }
-               
-               var next = document.getElementsByClassName("btn-next")[0];
-               next.onclick = function(){
-                clearInterval(timer);
-                index++;   
-                move(imgList , "left" , -520*index , 20 , function(){
-                    setA();
-                    autoChange();
-					});
-               }
-               
-               function setA(){
-                if(index >= imgArr.length - 1){
-						index = 0;
-						imgList.style.left = 0;
-                    }    
-                for(var i=0;i<allA.length;i++){
-                       allA[i].style.backgroundColor = "";
-                   }
-                   allA[index].style.backgroundColor = "black";
-                }
-                
-                var timer;
-                function autoChange(){
-					timer = setInterval(function(){
-						index++;
-						index %= imgArr.length;
-						move(imgList , "left" , -520*index , 20 , function(){
-							setA();
-						});						
-					},3000);
-                }                                                            
-            }
-    </script>-->
+    </style>                    
 </head>
 <body>
     <div id="outer">
@@ -163,8 +94,8 @@
             <li><img src="image/5.jpg" alt=""></li>
             <li><img src="image/1.jpg" alt=""></li>
         </ul>
-        <button class="btn-prev"><</button>
-        <button class="btn-next">></button>  
+        <button id="btn-prev"><</button>
+        <button id="btn-next">></button>  
         <div id="navDiv">
             <a href="javascript:;"></a>
             <a href="javascript:;"></a>       
