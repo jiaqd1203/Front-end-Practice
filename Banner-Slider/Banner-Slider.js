@@ -30,20 +30,32 @@ window.onload = function(){
     var next = document.getElementById("btn-next");
         prev.onclick = function(){
             clearInterval(timer);
-            index--;
-            move(imgList , "left" , -520*index , 20 , function(){
-                setA();
-            });                                     
+            index--;            
+            // 开头第一张处理方法，先变成最后一张，
+            // 然后目标设定为倒数第二张并且index值也需要改变否则直接变回第一张
+            if(index<0){
+                index = imgArr.length-1;
+                imgList.style.left = -520*index + "px";
+                index--;
+            }
+                move(imgList , "left" , -520*index , 20 , function(){
+                    setA();
+                });                                    
+            autoChange();                                    
         }
         
         next.onclick = function(){
             clearInterval(timer);
             index++;
+            if(index>imgArr.length-1){
+                index = 0;
+            }
             move(imgList , "left" , -520*index , 20 , function(){
                 setA();
-            });          
+            }); 
+            autoChange();         
         }
-    autoChange();
+            
     function setA(){        
         if(index >= imgArr.length - 1){
             index = 0;
