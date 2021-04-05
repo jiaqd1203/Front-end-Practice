@@ -82,31 +82,82 @@
         }
     </style>
     <script type="text/javascript">
-           window.onload = function(){
-               var imgList = document.getElementById("imgList");
-               var imgArr = document.getElementsByTagName("img");
-               var navDiv = document.getElementById("navDiv");
-               var outer = document.getElementById("outer");
-               navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
-               var index = 0;
-               var allA = document.getElementsByTagName("a");               
-               var next = document.getElementsByClassName("btn-next")[0];
-               allA[index].style.backgroundColor = "black";               
-                var timer;
+        window.onload = function () {
+                var imgList = document.getElementById("imgList");
+                var imgArr = document.getElementsByTagName("img");
+                var navDiv = document.getElementById("navDiv");
+                var outer = document.getElementById("outer");
+                navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth) / 2 + "px";
+                var index = 0;
+                var allA = document.getElementsByTagName("a");
+                var timer =null;
+                allA[index].style.backgroundColor = "black";               
+                for (var i = 0; i < allA.length; i++) {                    
+                    allA[i].num = i;
+                    allA[i].onclick = function(){
+                        clearInterval(timer);
+                        index = this.num;
+                        setA();
+                        for (var i = 0; i < imgArr.length; i++) {
+                            imgArr[i].style.display = "none";                            
+                        }
+                        imgArr[index].style.display = "block";
+                        autoChange();
+                    }
+                }
+
+                function setA(){
+                    for (var i = 0; i < allA.length; i++) {
+                        allA[i].style.backgroundColor = "";
+                    }
+                    allA[index].style.backgroundColor = "black";
+                }
+                // 如果是class一定要加[0]，id就不用
+                var prev = document.getElementsByClassName("btn-prev")[0];
+                var next = document.getElementsByClassName("btn-next")[0];
+                prev.onclick = function(){
+                    clearInterval(timer);
+                    index--;
+                        if (index < 0) {
+                            index = imgArr.length - 1;
+                        }
+                        setA();
+                        for (var i = 0; i < imgArr.length - 1; i++) {
+                            imgArr[i].style.display = "none";                            
+                        }
+                        imgArr[index].style.display = "block";
+                        autoChange();
+                }
+                next.onclick = function(){
+                    clearInterval(timer);
+                    index++;
+                        if (index > imgArr.length - 1) {
+                            index = 0;
+                        }
+                        setA();
+                        for (var i = 0; i < imgArr.length - 1; i++) {
+                            imgArr[i].style.display = "none";                            
+                        }
+                        imgArr[index].style.display = "block";
+                        autoChange();
+                }
                 function autoChange() {
-                   timer = setInterval(function () {
-                       index++;
-                       if (index > imgArr.length - 1) {
-                           index = 0;
-                       }
-                       for (var i = 0; i < imgArr.length - 1; i++) {
-                           imgArr[i].style.display = "none";
-                       }
-                       imgArr[index].style.display = "block";
-                   }, 2000)}
-                   autoChange();
-            }         
-    </script>
+                    timer = setInterval(function () {
+                        index++;
+                        if (index > imgArr.length - 1) {
+                            index = 0;
+                        }
+                        setA();
+                        for (var i = 0; i < imgArr.length - 1; i++) {
+                            imgArr[i].style.display = "none";                            
+                        }
+                        imgArr[index].style.display = "block";
+                        
+                    }, 2000);
+                }
+                autoChange();
+            }
+        </script>
 </head>
 <body>
     <div id="outer">
