@@ -7,3 +7,4 @@
 [WebpageNavigationEffects](https://jiaqd1203.github.io/Front-end-Practice/Webpage-Navigation-Effects/Navigation-Effects-js.html)<br>
 [FlexMenu](https://jiaqd1203.github.io/Front-end-Practice/FlexMenu/FlexMenuJS.html)<br>
 [BannerSliderWidth](https://jiaqd1203.github.io/Front-end-Practice/Banner-Slider/Banner-Slider-Width.html)
+[BannerSliderDisplay](https://jiaqd1203.github.io/Front-end-Practice/Banner-Slider/Banner-Slider-Display.html)
