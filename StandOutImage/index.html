@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Enlarge and Stand Out image</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap{
+            width: 960px;
+            height: 630px;
+            margin: 200px auto;
+        }
+
+        .images li{
+            margin: 10px;
+            float: left;
+            list-style: none;
+            border-radius: 5px;
+        }
+
+        .images li img{
+            width: 300px;
+            height: 150px;
+        }
+
+        #back{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(000, 000, 000, 0.7);
+            display: none;
+        }
+
+        #picDiv{
+            width: 500px;
+            height: 300px;
+            position: absolute;
+            border: 10px solid #fff;
+            display: none;
+        }
+
+        #img{
+            width: 100%;
+            height: 100%;
+        }
+
+        #left{
+            position: absolute;
+            top: 132.5px;
+            left: -60px;
+            cursor: pointer;
+        }
+
+        #right{
+            position: absolute;
+            top: 132.5px;
+            right: -60px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var wrap = document.getElementById("wrap");
+            var back = document.getElementById("back");
+            var picDiv = document.getElementById("picDiv");
+            var left = document.getElementById("left");
+            var right = document.getElementById("right");
+            var img = document.getElementById("img");
+            var link = wrap.getElementsByTagName("a");
+            var cur = 0;
+            for (var i = 0; i < link.length; i++){
+                link[i].index = i;
+                link[i].onclick = function(){
+                    var src = this.href;
+                    cur = this.index;
+                    back.style.display = "block";
+                    picDiv.style.display = "block";
+                    picDiv.style.left = "50%";
+                    picDiv.style.top = "50%";
+                    picDiv.style.marginLeft = -picDiv.offsetWidth/2 + "px";
+                    picDiv.style.marginTop = -picDiv.offsetWidth/2 + "px";
+                    img.src = src;
+                    left.onclick = function(){
+                        cur--;
+                        if(cur < 0){
+                            cur = link.length - 1;
+                        }
+                        img.src = link[cur].href;
+                    }
+                    right.onclick = function(){
+
+                        cur++;
+                        if(cur >= link.length){
+                            cur = 0;
+                        }
+                        img.src = link[cur].href;
+                    }
+                    return false;
+                }
+            }
+            back.onclick = function(){
+                back.style.display = "none";
+                picDiv.style.display = "none";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="images">
+            <ul>
+                <li><a href="img/S1.jpg"><img src="img/Scenery1.jpg" alt="" /></a></li>
+                <li><a href="img/S2.jpg"><img src="img/Scenery2.jpg" alt="" /></a></li>
+                <li><a href="img/S3.jpg"><img src="img/Scenery3.jpg" alt="" /></a></li>
+                <li><a href="img/S4.jpg"><img src="img/Scenery4.jpg" alt="" /></a></li>
+                <li><a href="img/S5.jpg"><img src="img/Scenery5.jpg" alt="" /></a></li>
+                <li><a href="img/S6.jpg"><img src="img/Scenery6.jpg" alt="" /></a></li>
+                <li><a href="img/S7.jpg"><img src="img/Scenery7.jpg" alt="" /></a></li>
+                <li><a href="img/S8.jpg"><img src="img/Scenery8.jpg" alt="" /></a></li>
+                <li><a href="img/S9.jpg"><img src="img/Scenery9.jpg" alt="" /></a></li>
+            </ul>
+        </div>
+        <div id="back"></div>
+        <div id="picDiv">
+            <!-- width18px; height35px -->
+            <img src="img/arrowL.png" id="left" />
+            <img src="img/arrowR.png" id="right" />
+            <img src="" id="img" />
+        </div>
+    </div>
+</body>
+
+</html>
