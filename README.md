@@ -8,3 +8,4 @@
 [FlexMenu](https://jiaqd1203.github.io/Front-end-Practice/FlexMenu/FlexMenuJS.html)<br>
 [BannerSliderWidth](https://jiaqd1203.github.io/Front-end-Practice/Banner-Slider/Banner-Slider-Width.html)<br>
 [BannerSliderDisplay](https://jiaqd1203.github.io/Front-end-Practice/Banner-Slider/Banner-Slider-Display.html)
+[StandOutImage](https://jiaqd1203.github.io/Front-end-Practice/StandOutImage/index.html)
