@@ -34,11 +34,11 @@
         }
 		
         #bigImg{ 
-            width: 300px; 
+            width: 200px; 
             height: 300px; 
             position: absolute; 
-            left: 450px; 
-            top:10px; 
+            left: 500px; 
+            top:100px; 
             overflow: hidden; 
             border: 1px solid #333; 
             display: none; 
@@ -49,6 +49,49 @@
             display: block;  
         }
 	</style>
+    <script>
+		window.onload = function(){
+			var normal = document.getElementById("normal");
+			var lay = document.getElementById("lay");
+			var bigImg = document.getElementById("bigImg");
+			var img = bigImg.getElementsByTagName("img")[0]; 
+			normal.onmouseover = function(){
+				lay.style.display = "block";
+				bigImg.style.display = "block";
+			} 
+			normal.onmouseout = function(){
+				lay.style.display = "none";
+				bigImg.style.display = "none";
+			}
+			normal.onmousemove = function(e){
+				var scale = 2;
+				var x = e.clientX - lay.offsetWidth/2 - normal.offsetLeft;
+				var y = e.clientY - lay.offsetHeight/2 - normal.offsetTop;  
+				lay.style.width = parseInt( normal.offsetWidth / scale ) + "px";
+				lay.style.height = parseInt( normal.offsetHeight / scale ) + "px"; 
+				img.style.width = normal.offsetWidth * scale + "px";
+				img.style.height = normal.offsetHeight * scale + "px";
+				if( x<0 ){
+					x = 0; 
+				}
+				if( x>=normal.offsetWidth - lay.offsetWidth ){
+					x = normal.offsetWidth - lay.offsetWidth; 
+				}
+				if( y<0 ){
+					y = 0;
+				}
+				if( y>= normal.offsetHeight - lay.offsetHeight ){
+					y = normal.offsetHeight - lay.offsetHeight; 
+				}
+				lay.style.left = x + "px";
+				lay.style.top = y + "px";
+				var left = scale * lay.offsetLeft;
+				var top = scale * lay.offsetTop;
+				img.style.left = -left + "px";
+				img.style.top = -top + "px";
+			}
+		}
+	</script>
 </head>
 <body>
 	<div id="normal">
