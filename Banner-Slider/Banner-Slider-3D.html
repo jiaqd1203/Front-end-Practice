@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Slider</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #outer{
+            margin-top: 100px;
+            width: 100%;
+            height: 300px;
+            position: relative;
+        }
+
+        #imgList{
+            width: 1200px;
+            height: 300px;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            margin-left: -600px;
+        }
+
+        img{
+            width: 750px;
+            height: 300px;
+            float: left;
+        }
+        
+        li{
+            position: absolute;
+            top: 0;
+            left: 0;
+            list-style: none;
+            /* opacity: 0; */
+            transition: all 0.3s ease-out;
+        }
+
+        li:nth-child(1){
+            transform:translate3d(-224px,0,0) scale(0.8);
+        }
+        li:nth-child(2){
+            transform:translate3d(0px,0,0) scale(0.8);
+            /* ? */
+            transform-origin:0 50%;
+            opacity: 0.8;
+            z-index: 2;
+        }
+        li:nth-child(3){
+            transform:translate3d(224px,0,0) scale(1);
+            z-index: 3;
+            opacity: 1;
+        }
+        li:nth-child(4){
+            transform:translate3d(448px,0,0) scale(0.8);
+            /* ? */
+            transform-origin:100% 50%;
+            opacity: 0.8;
+            z-index: 2;
+        }
+        li:nth-child(5){
+            transform:translate3d(672px,0,0) scale(0.8);
+        }
+        li:nth-child(6){
+            transform:translate3d(896px,0,0) scale(0.8);
+        }
+        li:nth-child(7){
+            transform:translate3d(1120px,0,0) scale(0.8);
+        }
+      
+        #navDiv{
+            position: absolute;
+            width: 200px;
+            height: 30px;
+            top: 265px;
+            left: 50%;
+            margin-left: -100px;
+            text-align: center;
+            padding-top: 10px;
+            z-index: 4;
+        }
+        
+        #navDiv a{
+            width: 16px;
+            height: 12px;           
+            background-color: red;
+            margin: 0 5px;
+            opacity: 0.5;
+            display: inline-block;		
+		    padding-top: 4px;
+		    cursor: pointer;
+        }
+        
+        #navDiv a:hover{
+            background-color: black;
+        }
+
+        .btn{
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+            width: 30px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            background-color: black;
+            opacity: .5;
+        }
+
+        .next{
+            right: 0;
+        }
+    </style>
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+        <script type="text/javascript">
+        var a = $("#navDiv a");
+        var arr = ["p7","p6","p5","p4","p3","p2","p1"];
+        var index = 0;
+        
+        $('.prev').click(
+            function(){
+                previmg();
+            }
+        )
+
+        $('.next').click(
+            function(){
+                nextimg();
+            }
+        )
+           
+        function previmg(){
+            // 在数组开头添加数组最末一项
+            arr.unshift(arr[6]);
+            // 删除数组最后一项，这样7654321就变成1765432了
+            arr.pop();
+            /*
+            function(index,element)	必需。为每个匹配元素规定运行的函数。
+            index - 选择器的 index 位置,索引
+            element - 当前的元素（也可使用 "this" 选择器）
+            */
+            $("li").each(function(i,e){
+                // 更新所有图片的index
+                $(e).removeClass().addClass(arr[i]);
+            })
+            // index哪来
+            index--;
+            if(index<0){
+                index=6;
+            }
+            show();
+        }
+        
+        function nextimg(){
+            // 在数组末尾添加数组开头一项
+            arr.push(arr[0]);
+            // 删除数组第一项，这样7654321就变成6543217了
+            arr.shift();
+            $("li").each(function(i,e){
+                $(e).removeClass().addClass(arr[i]);
+            })
+            index++;
+            if (index>6) {
+                index=0;
+            }
+            show();
+        }
+
+        
+        </script>
+    
+</head>
+<body>    
+        <div id="outer">
+            <ul id="imgList">
+                <li class="p1"><img src="image/Scenery1.jpg" alt=""></li>
+                <li class="p2"><img src="image/Scenery2.jpg" alt=""></li>
+                <li class="p3"><img src="image/Scenery3.jpg" alt=""></li>
+                <li class="p4"><img src="image/Scenery4.jpg" alt=""></li>
+                <li class="p5"><img src="image/Scenery5.jpg" alt=""></li>
+                <li class="p6"><img src="image/Scenery6.jpg" alt=""></li>
+                <li class="p7"><img src="image/Scenery7.jpg" alt=""></li>
+            </ul>
+            <button class="prev btn"><</button>
+            <button class="next btn">></button>  
+            <div id="navDiv">
+                <a href="javascript:;"></a>
+                <a href="javascript:;"></a>       
+                <a href="javascript:;"></a>
+                <a href="javascript:;"></a>
+                <a href="javascript:;"></a>
+            </div>
+        </div>   
+</body>
+</html>
