@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Change CSS Style</title>
+	<style type="text/css">
+		#outer{
+            width: 500px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        input{
+            margin: 0 5px;
+            padding: 5px;
+        }
+
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            margin: 25px auto;
+        }
+	</style>
+    <script type="text/javascript">
+	window.onload=function(){
+        var oBtn = document.getElementsByTagName('input');
+        var oBox = document.getElementById('box');            
+        var index = 0;
+
+		var attr=['width','height','background','display','display'];
+		var val=["200px",'200px','red','none','block'];
+		
+        for(var i=0;i<oBtn.length;i++){
+			//  为什么要执行oBtn[i].index = i;因为onclick函数里有一个闭包,闭包中若用i代替this.index,
+            //  则i永远只会取得最终值4,并不会达到理想效果,因此需要做一个拷贝
+            oBtn[i].index=i;
+			oBtn[i].onclick=function(){      
+                /*
+                从功能效果上看,是用&&的特性代替了if  
+                当&&前面的==为真时则运行&&后面的  当&&前面的==为假时则停止运行
+                if (this.index == oBtn.length - 1) {oDiv.style.cssText = ""}
+                */
+                // elem.style.cssText这个属性对非行内样式无任何影响,但却会覆盖行内样式,
+                // 由此可发现,通过changeStyle函数改变的属性是被动态地添加到行内         
+				this.index == oBtn.length-1 && (oBox.style.cssText="");
+                changeStyle(oBox,attr[this.index],val[this.index])							
+			}
+		}
+	}
+	function changeStyle(ele,attr,val) {
+		ele.style[attr]=val;
+	}
+    </script>
+</head>
+<body>
+	<div id="outer">
+        <input type="button" value="Wider">
+        <input type="button" value="Higher">
+        <input type="button" value="Red">
+        <input type="button" value="Hide">
+        <input type="button" value="Reset">
+        <div id="box"></div>
+    </div>
+
+</body>
+</html>
