@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change CSS Style</title>
+    <style>
+        #outer{
+            width: 500px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        input{
+            margin: 0 5px;
+            padding: 5px;
+        }
+
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            margin: 25px auto;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oBtn = document.getElementsByTagName('input');
+            var oBox = document.getElementById('box');            
+            var index = 0;
+            for(var i=0;i<oBtn.length;i++){
+                oBtn[i].index = i;
+                oBtn[i].onclick = function(){
+                    switch(this.index){
+                    case 0:
+                    oBox.style.width= 200 + 'px';
+                    break;    
+                    case 1:
+                    oBox.style.height=200 + 'px';
+                    break;
+                    case 2:
+                    oBox.style.backgroundColor='red';
+                    break;
+                    case 3:
+                    oBox.style.display='none';
+                    break;
+                    case 4:
+                    oBox.style.width= 100 + 'px'; 
+                    oBox.style.height=100 + 'px'; 
+                    oBox.style.backgroundColor='green';
+                    oBox.style.display='';                                                    
+                }        
+                                               
+            }
+            }
+            
+        }
+
+
+        /*
+        switch(i){
+                    case 0:
+                    oBox.style.width = 200 + 'px';
+                    break;    
+                    case 1:
+                    oBox.style['width'] = 200 + 'px';
+                    break;
+                    case 2:
+                    oBox.style['width'] = 200 + 'px';
+                    break;
+                    case 3:
+                    oBox.style['width'] = 200 + 'px';
+                    break;
+                    case 4:
+                    oBox.style['width'] = 200 + 'px';
+                    break;
+        */
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <input type="button" value="Wider">
+        <input type="button" value="Higher">
+        <input type="button" value="Red">
+        <input type="button" value="Hide">
+        <input type="button" value="Reset">
+        <div id="box"></div>
+    </div>
+</body>
+</html>
