@@ -85,7 +85,7 @@
 		  	没有这个类时，div就是展开的状态，思路就是点击菜单，通过加减class来切换菜单的显示状态*/
 			  var menuSpan = document.getElementsByClassName("menuSpan");
 			//5定义一个变量，来保存当前展开的菜单，默认的展开菜单是第一个
-			//这样会写死，一直都是第一个，所以我们要修改openDiv为当前打开的菜单
+			//这样会写死，一直都是第一个，所以我们要修改openDiv为当前打开的菜单openDiv = parentDiv;
 			var openDiv = menuSpan[0].parentNode;
 			//2为span绑定单击响应函数
 			for(var i=0; i<menuSpan.length; i++){
