@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Modal</title>
+</head>
+
+<body>
+    <button class="btn_launch">
+        Launch Modal
+    </button>
+    <div id="modal" class="modal">
+        <div class="modal_content">
+            <div class="modal_header">
+                <h4>
+                    <i class="modal_check"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" />
+                        </svg></i>
+                    Congratulations your jet2 holiday booking has been confirmed
+                </h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur inventore,
+                    dignissimos quasi fuga sunt, nihil nemo labore? Molestiae, eum, eos!
+                    Illum non laborum asperiores, mollitia minima quasi atque. Eligendi, atque.
+                </p>
+            </div>
+        </div>
+        <div class="modal_footer">
+            <button id="cancel">Cancel</button>
+            <button id="continue">Continue</button>
+        </div>
+    </div>
+    <div id="back"></div>
+    <script>
+        let btn_launch = document.getElementsByClassName('btn_launch')[0];
+        let btn_cancel = document.getElementById('cancel');
+        let btn_continue = document.getElementById('continue');
+        let modal = document.getElementById('modal');
+        let back = document.getElementById('back');
+        btn_launch.addEventListener('click',function(){
+            modal.style.display = 'block';
+            btn_launch.style.display = 'none';
+            back.style.display = 'block';
+        });
+        btn_cancel.addEventListener('click',function(){
+            modal.style.display = 'none';
+            btn_launch.style.display = 'block';
+            back.style.display = 'none';
+        });
+        btn_continue.addEventListener('click',function(){
+            window.location = "http://www.jet2.com/";
+        });
+    </script>
+</body>
+
+</html>
