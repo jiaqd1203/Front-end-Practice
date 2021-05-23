@@ -18,10 +18,15 @@ $cancelColor:#626262;
     color: $textColor;
     background-color: rgb(56, 120, 240);
     margin: 200px auto;
+    margin-bottom: 0;
     cursor: pointer;
     &:hover{
         background-color: rgb(24, 96, 232);
     }
+}
+
+.btn_launch2{
+    margin-top: 20px;
 }
 
 #modal{

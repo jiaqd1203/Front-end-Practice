@@ -10,8 +10,11 @@
 </head>
 
 <body>
-    <button class="btn_launch">
-        Launch Modal
+    <button class="btn_launch btn_launch1">
+        Launch Modal 1
+    </button>
+    <button class="btn_launch btn_launch2">
+        Launch Modal 2
     </button>
     <div id="modal" class="modal">
         <div class="modal_content">
@@ -38,24 +41,26 @@
     </div>
     <div id="back"></div>
     <script>
-        let btn_launch = document.getElementsByClassName('btn_launch')[0];
+        let btn_launch = document.getElementsByClassName('btn_launch');
         let btn_cancel = document.getElementById('cancel');
         let btn_continue = document.getElementById('continue');
         let modal = document.getElementById('modal');
         let back = document.getElementById('back');
-        btn_launch.addEventListener('click',function(){
+        for(let i=0; i<btn_launch.length; i++){
+            btn_launch[i].addEventListener('click',function(){
             modal.style.display = 'block';
-            btn_launch.style.display = 'none';
+            btn_launch[i].style.display = 'none';
             back.style.display = 'block';
-        });
-        btn_cancel.addEventListener('click',function(){
+            });
+            btn_cancel.addEventListener('click',function(){
             modal.style.display = 'none';
-            btn_launch.style.display = 'block';
+            btn_launch[i].style.display = 'block';
             back.style.display = 'none';
         });
-        btn_continue.addEventListener('click',function(){
+            btn_continue.addEventListener('click',function(){
             window.location = "http://www.jet2.com/";
         });
+        }
     </script>
 </body>
 
