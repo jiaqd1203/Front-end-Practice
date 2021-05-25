@@ -9,7 +9,7 @@
 [StandOutImage](https://jiaqd1203.github.io/Front-end-Practice/StandOutImage/index.html)
 [WaterFallFlow](https://jiaqd1203.github.io/Front-end-Practice/The-Waterfall-Flow-Layout/Waterfall-jq.html/Waterfall-jq.html)<br>
 [WebpageNavigationEffects](https://jiaqd1203.github.io/Front-end-Practice/Webpage-Navigation-Effects/Navigation-Effects-js.html)<br>
-[MultipleModal](https://jiaqd1203.github.io/Front-end-Practice/Front-end-Practice/MultipleModal/index.html)<br>
+[MultipleModal](https://jiaqd1203.github.io/Front-end-Practice/MultipleModal/index.html)<br>
 
 
 
