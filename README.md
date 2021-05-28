@@ -11,6 +11,7 @@
 [WebpageNavigationEffects](https://jiaqd1203.github.io/Front-end-Practice/Webpage-Navigation-Effects/Navigation-Effects-js.html)<br>
 [MultipleModal](https://jiaqd1203.github.io/Front-end-Practice/MultipleModal/index.html)<br>
 [Tab](https://jiaqd1203.github.io/Front-end-Practice/Tabs/Tab-Auto.html)<br>
+[MagnifyingGlass](https://jiaqd1203.github.io/Front-end-Practice/MagnifyingGlass/Magnifying.html)<br>
 
 
 
