@@ -14,7 +14,7 @@
 [The-Waterfall-Flow-Layout](https://jiaqd1203.github.io/Front-end-Practice/The-Waterfall-Flow-Layout/Waterfall-js.html)<br>
 [WaterFallFlow](https://jiaqd1203.github.io/Front-end-Practice/The-Waterfall-Flow-Layout/Waterfall-jq.html/Waterfall-jq.html)<br>
 [WebpageNavigationEffects](https://jiaqd1203.github.io/Front-end-Practice/Webpage-Navigation-Effects/Navigation-Effects-js.html)<br>
-
+[Tabs](https://jiaqd1203.github.io/Front-end-Practice/Tabs/Tab-Auto.html)
 
 
 
