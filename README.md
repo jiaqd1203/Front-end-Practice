@@ -7,6 +7,7 @@
 [FlexMenu](https://jiaqd1203.github.io/Front-end-Practice/FlexMenu/FlexMenuJS.html)<br>
 [MagnifyingGlass](https://jiaqd1203.github.io/Front-end-Practice/MagnifyingGlass/Magnifying.html)<br>
 [MultipleModal](https://jiaqd1203.github.io/Front-end-Practice/MultipleModal/index.html)<br>
+[RippleMenu](https://jiaqd1203.github.io/Front-end-Practice/RippleMenu/rippleMenu.html)<br>
 [SecondaryMenu](https://jiaqd1203.github.io/Front-end-Practice/SecondaryMenu/SecondaryMenu.html)<br>
 [shoppingCart](https://jiaqd1203.github.io/Front-end-Practice/shoppingCart/shoppingCart.html)<br>
 [StandOutImage](https://jiaqd1203.github.io/Front-end-Practice/StandOutImage/index.html)
